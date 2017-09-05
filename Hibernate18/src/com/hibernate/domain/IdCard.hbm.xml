@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.domain">
+	<!-- 
+		constrained="true"
+		表示id主键同时作为外键参考person表，在映射文件中id必须使用foreign主键生成策略
+	-->
+	<class name="IdCard" table="id_card">		
+		<id name="id">
+			<generator class="foreign">
+				<param name="property">person</param>
+			</generator>
+		</id>
+		<property name="usefulLife" column="useful_life" />	
+		<one-to-one name="person" class="Person" constrained="true" />
+	</class>
+</hibernate-mapping>

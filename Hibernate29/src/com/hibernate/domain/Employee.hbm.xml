@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 
+	将三种员工（父类定义的普通员工、技术员和销售员）的记录都放在同一张表中，
+	通过一个指定的字段（type）设定不同的值来区分三种身份
+-->
+<hibernate-mapping package="com.hibernate.domain">
+	<class name="Employee" discriminator-value="0">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<discriminator column="type" type="int" />
+		<property name="name" />
+		<many-to-one name="depart" column="depart_id" />
+		<subclass name="Skiller" discriminator-value="1">
+			<property name="skill" />
+		</subclass>
+		<subclass name="Sales" discriminator-value="2">
+			<property name="sell" />
+		</subclass>
+	</class>
+</hibernate-mapping>

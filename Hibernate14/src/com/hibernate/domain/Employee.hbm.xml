@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.domain">
+	<class name="Employee">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<!-- column设定与持久化类的属性对应的表的外键 -->
+		<many-to-one name="depart" column="depart_id" class="Department" />
+	</class>
+</hibernate-mapping>

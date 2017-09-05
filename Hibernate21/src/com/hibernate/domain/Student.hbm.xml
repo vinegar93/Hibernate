@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.domain">
+	<class name="Student">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<!--
+			 table指定中间关联表
+			 key元素column指定当前类在中间关联表中对应的字段
+			 many-to-many元素column指定中间关联表中本类想要的外键
+		-->
+		<set name="teachers" table="teacher_student">
+			<key column="student_id" />
+			<many-to-many class="Teacher" column="teacher_id" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.domain">
+	<class name="Employee">
+		<id name="id">
+			<!-- hilo（高低位）是hibernate中最常用的一种主键生成策略，需要一张额外的表保存hi的值。 -->
+			<generator class="hilo" />
+		</id>
+		<property name="name" />
+		<many-to-one name="depart" column="depart_id" />
+		<union-subclass name="Skiller" table="skiller">
+			<property name="skill" />
+		</union-subclass>
+		<union-subclass name="Sales" table="sales">
+			<property name="sell" />
+		</union-subclass>
+	</class>
+</hibernate-mapping>

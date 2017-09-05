@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.domain">
+	<class name="Department">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<!-- 
+			cascade设置级联操作，
+			用来说明当对主对象进行某种操作时是否对其关联的从对象也做类似的操作 
+		-->
+		<!-- 
+			inverse表示是否放弃维护关联关系，默认值为false（表示不放弃维护关联关系）
+		-->
+		<set name="emps" cascade="save-update" inverse="true">
+			<key column="depart_id" />
+			<one-to-many class="Employee" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.domain">
+	<class name="Employee" discriminator-value="0">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<discriminator column="type" type="int" />
+		<property name="name" />
+		<many-to-one name="depart" column="depart_id" />
+		<subclass name="Skiller" discriminator-value="1">
+			<property name="skill" />
+		</subclass>
+		<subclass name="Sales" discriminator-value="2">
+			<join table="sales">
+				<key column="emp_id" />
+				<property name="sell" />
+			</join>
+		</subclass>
+	</class>
+</hibernate-mapping>
